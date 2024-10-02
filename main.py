@@ -13,8 +13,13 @@ def selenium_textbox():
         print("The Element is displayed")
     else: 
         print("The Element is NOT displayed")
-    
+    expected_result = "You have done a dynamic click"
+    # .text() is used to get the text of an element.
+    actual_result = dynamic_message.text()
+    # assert statement is a built-in construct that allows you to test assumptions about your code
+    assert expected_result == actual_result
     time.sleep(5)
+    
 
 if __name__ == "__main__":
     selenium_textbox()
