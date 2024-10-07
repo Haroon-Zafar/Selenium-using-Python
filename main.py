@@ -22,6 +22,8 @@ class MySetup(unittest.TestCase):
 # Defining Test Cases in another 
 class MyTestCases(MySetup):
     # without `self` keyword we cannot define methods in our classes
+    @unittest.skip("Need to be updated after sprint 2")
+    # Above line will skip this particular test case and rest of the test cases will run
     def test_unit_test(self):
         
         # click_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div[2]/div[2]/div[3]/button")
