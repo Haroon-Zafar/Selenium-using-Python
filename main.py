@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 # Defining setup and tearDown methods in one class
+# It will help us to reduce redundancy of setup and tearDown class
 class MySetup(unittest.TestCase):
 
     def setup(self):
