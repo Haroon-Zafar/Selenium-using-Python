@@ -1,5 +1,6 @@
 import time
 import unittest
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,25 +11,40 @@ from selenium.webdriver.support import expected_conditions as EC
 # It will help us to reduce redundancy of setup and tearDown class
 class MySetup(unittest.TestCase):
 
-    def setup(self):
-        self.driver = webdriver.Chrome()
-        self.driver.get("https://demoqa.com/buttons")
-        self.driver.maximize_window()
+    # pytest allows us to execute specific set of actions
+    @pytest.fixture
+    def browser(self):
+        chrome_driver = webdriver.Chrome()
+        # yield function returns this particular function after all the test cases have stopped using it
+        yield chrome_driver
+        chrome_driver.quit()    
 
-    def tearDown(self):
-        return super().tearDown()
+    # # defining a description method
+    # def short_description(self):
+    #     return ("This is the test case for Login Functionality")
+    
+    # def setup(self):
+    #     self.driver = webdriver.Chrome()
+    #     self.driver.get("https://demoqa.com/buttons")
+    #     self.driver.maximize_window()
+
+    # def tearDown(self):
+    #     return super().tearDown()
         
 
 # Defining Test Cases in another 
 class MyTestCases(MySetup):
     # without `self` keyword we cannot define methods in our classes
-    @unittest.skip("Need to be updated after sprint 2")
+    # @unittest.skip("Need to be updated after sprint 2")
     # Above line will skip this particular test case and rest of the test cases will run
     def test_unit_test(self):
+
+        short_description = self.short_description()
+        print(short_description)
         
         # click_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div[2]/div[2]/div[3]/button")
-        click_button = self.driver.find_element(By.ID, "C1SRU")
-        click_button.click()
+        # click_button = self.driver.find_element(By.ID, "C1SRU")
+        # click_button.click()
 
         try:
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(By.ID, 'dynamicClickMessage'))
